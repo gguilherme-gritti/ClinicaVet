@@ -13,6 +13,7 @@ import java.time.LocalDate;
 public class Tratamento {
     
     private int id_trat;
+    private int id_animal;
     private LocalDate dat_ini;
     private LocalDate dat_fim;
 
@@ -41,5 +42,13 @@ public class Tratamento {
     public void setDat_fim(LocalDate dat_fim) {
         this.dat_fim = dat_fim;
     } 
+
+    public int getId_animal() {
+        return id_animal;
+    }
+
+    public void setId_animal(int id_animal) {
+        this.id_animal = id_animal;
+    }
     
 }

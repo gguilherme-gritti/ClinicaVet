@@ -13,18 +13,24 @@ import java.util.List;
  */
 public class ClienteDAO extends DAO {
 
-    private List<Cliente> clientes = new ArrayList<>();
+    static List<Cliente> clientes = new ArrayList<>();
 
-    public List<Cliente> retrieveAll() {
+    public static List<Cliente> retrieveAll() {
         return clientes;
     }
 
-    public void retrieveById(int id_cli) {
-
+    public static Cliente retrieveById(int id_cli) {
+        for(Cliente cli: clientes){
+            if(cli.getId_cli() == id_cli){
+                return cli;
+            }
+        }
+        
+        return new Cliente(99, 99, "Cliente Não encontrado", "nao@encontrado.com");
     }
 
-    public void create(int id_end, String nom_cli, String email_cli) {
-        
+    public static void create(int id_cli, int id_end, String nom_cli, String email_cli) {
+        clientes.add(new Cliente(id_cli, id_end, nom_cli, email_cli));
     }
 
     public boolean update() {

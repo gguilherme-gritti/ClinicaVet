@@ -13,18 +13,25 @@ import java.util.List;
  */
 public class AnimalDAO extends DAO {
 
-    private List<Animal> animais = new ArrayList<>();
+    static List<Animal> animais = new ArrayList<>();
 
-    public List<Animal> retrieveAll() {
+    public static List<Animal> retrieveAll() {
         return animais;
     }
 
-    public List<Animal> retrieveByIdCli(int id_cli) {
-        return animais;
+    public static List<Animal> retrieveByIdCli(int id_cli) {
+        List<Animal> animaisCliente = new ArrayList<>();
+        for(Animal anm: animais){
+            if(anm.getId_cli() == id_cli){
+                animaisCliente.add(anm);
+            }
+        }
+     
+        return animaisCliente;
     }
 
-    public void create(int id_cli, int esp_id, int id_trat, String nome_animal, int idade_animal, int sexo_animal) {
-
+    public static void create(int id_ani, int id_cli, int esp_id, String nome_animal, int idade_animal, int sexo_animal) {
+        animais.add(new Animal(id_ani, id_cli, esp_id, nome_animal, idade_animal, sexo_animal));
     }
 
     public boolean update() {

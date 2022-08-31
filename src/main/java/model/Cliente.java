@@ -9,7 +9,7 @@ package model;
  * @author g247468
  */
 public class Cliente {
-    
+
     private int id_cli;
     private int id_end;
     private String nom_cli;
@@ -45,5 +45,5 @@ public class Cliente {
     public void setEmail_cli(String email_cli) {
         this.email_cli = email_cli;
     }
-    
+
 }

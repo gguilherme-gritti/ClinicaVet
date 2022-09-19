@@ -29,7 +29,7 @@ public class ClienteDAO extends DAO {
         return (instance == null ? (instance = new ClienteDAO()) : instance);
     }
 
-    public Cliente create(int id_cli, int id_end, String nom_cli, String email_cli) {
+    public Cliente create(int id_end, String nom_cli, String email_cli) {
         try {
             PreparedStatement stmt;
             stmt = DAO.getConnection().prepareStatement("INSERT INTO Cliente (id_end, nom_cli, email_cli) VALUES (?,?,?)");
@@ -40,11 +40,11 @@ public class ClienteDAO extends DAO {
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return this.retrieveById(lastId("cliente", "id"));
+        return this.retrieveById(lastId("Cliente", "id_cli"));
     }
 
     public boolean isLastEmpty() {
-        Cliente lastClient = this.retrieveById(lastId("cliente", "id"));
+        Cliente lastClient = this.retrieveById(lastId("Cliente", "id_cli"));
         if (lastClient != null) {
             return lastClient.getNom_cli().isBlank();
         }
@@ -75,11 +75,11 @@ public class ClienteDAO extends DAO {
     }
 
     public List retrieveLast() {
-        return this.retrieve("SELECT * FROM cliente WHERE id = " + lastId("cliente", "id"));
+        return this.retrieve("SELECT * FROM Cliente WHERE id_cli = " + lastId("Cliente", "id_cli"));
     }
 
     public Cliente retrieveById(int id) {
-        List<Cliente> clientes = this.retrieve("SELECT * FROM cliente WHERE id = " + id);
+        List<Cliente> clientes = this.retrieve("SELECT * FROM Cliente WHERE id_cli = " + id);
         return (clientes.isEmpty() ? null : clientes.get(0));
     }
 
@@ -90,7 +90,7 @@ public class ClienteDAO extends DAO {
     public void update(Cliente cliente) {
         try {
             PreparedStatement stmt;
-            stmt = DAO.getConnection().prepareStatement("UPDATE Cliente SET nom_cli=?, email_cli=? WHERE id=?");
+            stmt = DAO.getConnection().prepareStatement("UPDATE Cliente SET nom_cli=?, email_cli=? WHERE id_cli=?");
             stmt.setString(1, cliente.getNom_cli());
             stmt.setString(2, cliente.getEmail_cli());
             stmt.setInt(3, cliente.getId_cli());
@@ -103,7 +103,7 @@ public class ClienteDAO extends DAO {
     public void delete(Cliente cliente) {
         PreparedStatement stmt;
         try {
-            stmt = DAO.getConnection().prepareStatement("DELETE FROM Cliente WHERE id = ?");
+            stmt = DAO.getConnection().prepareStatement("DELETE FROM Cliente WHERE id_cli = ?");
             stmt.setInt(1, cliente.getId_cli());
             executeUpdate(stmt);
         } catch (SQLException e) {

@@ -18,6 +18,9 @@ import model.AnimalDAO;
 public class main {
 
     public static void main(String[] args) {
-
+        //ClienteDAO.getInstance().create(1, "Guilherme Gritti", "goulart.gritti@outlook.com");
+        Cliente c1 = ClienteDAO.getInstance().retrieveById(1);
+        
+        System.out.println(c1.getNom_cli());
     }
 }

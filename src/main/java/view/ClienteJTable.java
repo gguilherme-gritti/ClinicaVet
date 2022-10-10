@@ -14,4 +14,8 @@ import model.Cliente;
  */
 public class ClienteJTable {
 
+    public List<Cliente> getAllClients() {
+        return ClienteDAO.retrieveAll();
+    }
+
 }

@@ -73,11 +73,7 @@ public class ClienteDAO extends DAO {
         }
         return clientes;
     }
-    
-    public List retrieveAll() {
-        return this.retrieve("SELECT * FROM Cliente");
-    }
-   
+
     public List retrieveLast() {
         return this.retrieve("SELECT * FROM Cliente WHERE id_cli = " + lastId("Cliente", "id_cli"));
     }

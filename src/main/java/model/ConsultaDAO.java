@@ -17,7 +17,7 @@ import java.time.LocalDate;
  *
  * @author Gritti
  */
-public class ConsultaDAO extends DAO{
+public class ConsultaDAO extends DAO {
 
     private static ConsultaDAO instance;
 
@@ -71,5 +71,5 @@ public class ConsultaDAO extends DAO{
         List<Consulta> consultas = this.retrieve("SELECT * FROM Consulta WHERE id_cons = " + id);
         return (consultas.isEmpty() ? null : consultas.get(0));
     }
-    
+
 }

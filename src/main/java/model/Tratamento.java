@@ -18,11 +18,12 @@ public class Tratamento {
     private LocalDate dat_fim;
     private int finalizado;
 
-    public Tratamento(int id_trat, LocalDate dat_ini, LocalDate dat_fim, int finalizado) {
+    public Tratamento(int id_trat, int id_animal, LocalDate dat_ini, LocalDate dat_fim, int finalizado) {
         this.id_trat = id_trat;
         this.dat_ini = dat_ini;
         this.dat_fim = dat_fim;
         this.finalizado = finalizado;
+        this.id_animal = id_animal
     }
 
     public int getFinalizado() {

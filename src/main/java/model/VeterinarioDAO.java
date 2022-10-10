@@ -79,5 +79,9 @@ public class VeterinarioDAO extends DAO{
         List<Veterinario> veterinarios = this.retrieve("SELECT * FROM Veterinario WHERE id_vet = " + id);
         return (veterinarios.isEmpty() ? null : veterinarios.get(0));
     }
+    
+    public List retrieveAll() {
+        return this.retrieve("SELECT * FROM Veterinario");
+    }
 
 }

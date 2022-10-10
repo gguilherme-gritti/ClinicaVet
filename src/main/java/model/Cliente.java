@@ -12,6 +12,10 @@ public class Cliente {
 
     private int id_cli;
     private int id_end;
+
+    public void setId_end(int id_end) {
+        this.id_end = id_end;
+    }
     private String nom_cli;
     private String email_cli;
 

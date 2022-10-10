@@ -23,7 +23,7 @@ public class Tratamento {
         this.dat_ini = dat_ini;
         this.dat_fim = dat_fim;
         this.finalizado = finalizado;
-        this.id_animal = id_animal
+        this.id_animal = id_animal;
     }
 
     public int getFinalizado() {

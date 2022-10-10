@@ -52,13 +52,13 @@ public class ExameDAO extends DAO{
     }
 
     private Exame buildObject(ResultSet rs) {
-        Exame especie = null;
+        Exame exame = null;
         try {
-            especie = new Exame(rs.getInt("id_exam"), rs.getInt("id_cons"), rs.getString("des_exame"));
+            exame = new Exame(rs.getInt("id_exam"), rs.getInt("id_cons"), rs.getString("des_exame"));
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
         }
-        return especie;
+        return exame;
     }
 
     public List retrieve(String query) {

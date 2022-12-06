@@ -5,13 +5,14 @@
 package view;
 
 import controller.Controller;
+import model.Cliente;
 
 /**
  *
  * @author Gritti
  */
 public class Principal extends javax.swing.JFrame {
-
+    
     private Warning modalWarning = null;
 
     /**
@@ -21,18 +22,20 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         initMyComponents();
     }
-
+    
     private void initMyComponents() {
         jTable1.setModel(new ClientTableModel(Controller.getAllClients()));
         jTable8.setModel(new VeterinarioTableModel(Controller.getAllVeterinarios()));
-
+        
         modalWarning = new Warning(this, true);
-
+        
+        Controller.setSelectedTextFields(jTextPane1, jTextPane2, jTextPane3, jTextPane9);
+        
         clearClientes();
         clearAnimais();
         clearVeterinarios();
     }
-
+    
     private void clearClientes() {
         jTextField1.setText("");
         jTextField2.setText("");
@@ -42,12 +45,12 @@ public class Principal extends javax.swing.JFrame {
         jTextField6.setText("");
         jTextField7.setText("");
     }
-
+    
     private void clearAnimais() {
         jTextField8.setText("");
         jTextField9.setText("");
     }
-
+    
     private void clearVeterinarios() {
         jTextField12.setText("");
         jTextField13.setText("");
@@ -56,16 +59,16 @@ public class Principal extends javax.swing.JFrame {
         jTextField14.setText("");
         jTextField15.setText("");
     }
-
+    
     private boolean validCliente() {
         if (jTextField1.getText().isEmpty() || jTextField2.getText().isEmpty() || jTextField3.getText().isEmpty() || jTextField4.getText().isEmpty()
                 || jTextField5.getText().isEmpty() || jTextField6.getText().isEmpty() || jTextField7.getText().isEmpty()) {
             return false;
         }
-
+        
         return true;
     }
-
+    
     private boolean validVeterinario() {
         if (jTextField12.getText().isEmpty() || jTextField13.getText().isEmpty() || jTextField10.getText().isEmpty()
                 || jTextField11.getText().isEmpty() || jTextField14.getText().isEmpty() || jTextField15.getText().isEmpty()) {
@@ -249,6 +252,11 @@ public class Principal extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable1MousePressed(evt);
+            }
+        });
         jScrollPane4.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -886,29 +894,27 @@ public class Principal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 762, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 762, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel33)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane21)))))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel33)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane21)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -946,7 +952,7 @@ public class Principal extends javax.swing.JFrame {
             modalWarning.show();
             return;
         }
-
+        
         Controller.addCliente(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), jTextField4.getText(),
                 jTextField5.getText(), jTextField6.getText(), jTextField7.getText());
         clearClientes();
@@ -981,6 +987,10 @@ public class Principal extends javax.swing.JFrame {
         clearVeterinarios();
         jTable8.setModel(new VeterinarioTableModel(Controller.getAllVeterinarios()));
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
+        Controller.setSelectedCliente((Cliente)((GenericTableModel) jTable1.getModel()).getItem(jTable1.getSelectedRow()));
+    }//GEN-LAST:event_jTable1MousePressed
 
     /**
      * @param args the command line arguments

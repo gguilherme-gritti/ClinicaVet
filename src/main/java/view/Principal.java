@@ -7,6 +7,7 @@ package view;
 import controller.Controller;
 import model.Animal;
 import model.Cliente;
+import model.Tratamento;
 import model.Veterinario;
 
 /**
@@ -30,6 +31,9 @@ public class Principal extends javax.swing.JFrame {
         jTable8.setModel(new VeterinarioTableModel(Controller.getAllVeterinarios()));
         jTable2.setModel(new AnimalTableModel(Controller.getAllAnimals()));
         jTable3.setModel(new ConsultaTableModel(Controller.getAllConsults()));
+        jTable5.setModel(new TratamentoTableModel(Controller.getAllTratamentos()));
+        jTable6.setModel(new ConsultaTableModel(Controller.getAllConsults()));
+        jTable9.setModel(new ConsultaTableModel(Controller.getAllConsults()));
 
         modalWarning = new Warning(this, true);
 
@@ -605,6 +609,11 @@ public class Principal extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable5MousePressed(evt);
+            }
+        });
         jScrollPane11.setViewportView(jTable5);
 
         jTable6.setModel(new javax.swing.table.DefaultTableModel(
@@ -1092,7 +1101,13 @@ public class Principal extends javax.swing.JFrame {
 
     private void jTable8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable8MousePressed
         Controller.setSelectedVeterinario((Veterinario) ((GenericTableModel) jTable8.getModel()).getItem(jTable8.getSelectedRow()));
+        jTable9.setModel(new ConsultaTableModel(Controller.getConsultsByVetId(Controller.getSelectedVeterinario().getId_vet())));
     }//GEN-LAST:event_jTable8MousePressed
+
+    private void jTable5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable5MousePressed
+        Controller.setSelectedTratamento((Tratamento) ((GenericTableModel) jTable5.getModel()).getItem(jTable5.getSelectedRow()));
+        jTable6.setModel(new ConsultaTableModel(Controller.getConsultsByTratId(Controller.getSelectedTratamento().getId_trat())));
+    }//GEN-LAST:event_jTable5MousePressed
 
     /**
      * @param args the command line arguments

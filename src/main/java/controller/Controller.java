@@ -57,12 +57,24 @@ public class Controller {
         return ConsultaDAO.getInstance().retrieveAll();
     }
 
+    public static List getAllTratamentos() {
+        return TratamentoDAO.getInstance().retrieveAll();
+    }
+
     public static List getAnimalsByClienteId(int id_cli) {
         return AnimalDAO.getInstance().retrieveByClienteId(id_cli);
     }
 
     public static List getConsultsByAnimalId(int id_animal) {
         return ConsultaDAO.getInstance().retrieveByAnimalId(id_animal);
+    }
+    
+    public static List getConsultsByTratId(int id_trat){
+        return ConsultaDAO.getInstance().retrieveByTratId(id_trat);
+    }
+    
+    public static List getConsultsByVetId(int id_vet){
+        return ConsultaDAO.getInstance().retrieveByVetId(id_vet);
     }
 
     public static void addCliente(String nome, String email, String cidade, String estado, String rua, String bairro, String cep) {;
@@ -80,8 +92,8 @@ public class Controller {
     public static void addConsulta(String sintomas) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
         String date = sdf.format(new Date());
-        
-        setSelectedTratamento();
+
+        setSelectedTratamentoByAnimalId();
         ConsultaDAO.getInstance().create(selectedTratamento.getId_trat(), selectedVeterinario.getId_vet(), sintomas, date, selectedAnimal.getId_ani());
     }
 
@@ -94,11 +106,15 @@ public class Controller {
         selectedAnimal = animal;
         selectedAnimalTP.setText(animal.getNome_animal());
         selectedIdadeAnimalTP.setText(String.valueOf(animal.getIdade_animal()));
-        
-        setSelectedTratamento();
+
+        setSelectedTratamentoByAnimalId();
     }
 
-    public static void setSelectedTratamento() {
+    public static void setSelectedTratamento(Tratamento tratamento) {
+        selectedTratamento = tratamento;
+    }
+
+    public static void setSelectedTratamentoByAnimalId() {
         Tratamento tratamentos = TratamentoDAO.getInstance().retrieveByAnimalId(selectedAnimal.getId_ani());
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
@@ -107,7 +123,7 @@ public class Controller {
         if (tratamentos == null) {
             tratamentos = TratamentoDAO.getInstance().create(selectedAnimal.getId_ani(), date, 0);
         }
-        
+
         selectedTratamento = tratamentos;
     }
 

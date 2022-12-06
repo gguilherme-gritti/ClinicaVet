@@ -11,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.time.LocalDate;
 
 /**
  *
@@ -82,9 +81,14 @@ public class ConsultaDAO extends DAO {
     public List retrieveByTratId(int id_trat) {
         return this.retrieve("SELECT * FROM Consulta WHERE id_trat = " + id_trat);
     }
-    
+
     public List retrieveByAnimalId(int id_animal) {
         return this.retrieve("SELECT * FROM Consulta WHERE id_animal = " + id_animal);
+    }
+
+    public List retrieveByVetId(int id_vet) {
+        return this.retrieve("SELECT * FROM Consulta WHERE id_vet = " + id_vet);
+
     }
 
     public void update(Consulta consulta) {

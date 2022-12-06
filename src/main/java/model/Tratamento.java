@@ -14,11 +14,11 @@ public class Tratamento {
     
     private int id_trat;
     private int id_animal;
-    private LocalDate dat_ini;
-    private LocalDate dat_fim;
+    private String dat_ini;
+    private String dat_fim;
     private int finalizado;
 
-    public Tratamento(int id_trat, int id_animal, LocalDate dat_ini, LocalDate dat_fim, int finalizado) {
+    public Tratamento(int id_trat, int id_animal, String dat_ini, String dat_fim, int finalizado) {
         this.id_trat = id_trat;
         this.dat_ini = dat_ini;
         this.dat_fim = dat_fim;
@@ -38,19 +38,19 @@ public class Tratamento {
         return id_trat;
     }
 
-    public LocalDate getDat_ini() {
+    public String getDat_ini() {
         return dat_ini;
     }
 
-    public void setDat_ini(LocalDate dat_ini) {
+    public void setDat_ini(String dat_ini) {
         this.dat_ini = dat_ini;
     }
 
-    public LocalDate getDat_fim() {
+    public String getDat_fim() {
         return dat_fim;
     }
 
-    public void setDat_fim(LocalDate dat_fim) {
+    public void setDat_fim(String dat_fim) {
         this.dat_fim = dat_fim;
     } 
 

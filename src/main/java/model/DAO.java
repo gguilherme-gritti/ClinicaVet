@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  */
 public abstract class DAO {
 
-    public static final String DBURL = "jdbc:sqlite:vet.db";
+    public static final String DBURL = "jdbc:sqlite:veterinaria-v1.db";
     private static Connection con;
     protected static SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -117,8 +117,8 @@ public abstract class DAO {
                     + "id_trat INTEGER PRIMARY KEY, \n"
                     + "id_animal INTEGER, \n"
                     + "nome VARCHAR, \n"
-                    + "data_ini TEXT, \n"
-                    + "data_fim TEXT, \n"
+                    + "data_ini VARCHAR, \n"
+                    + "data_fim VARCHAR, \n"
                     + "finalizado INTEGER); \n");
             executeUpdate(stmt);
 
@@ -126,7 +126,9 @@ public abstract class DAO {
                     + "id_cons INTEGER PRIMARY KEY, \n"
                     + "id_trat INTEGER, \n"
                     + "id_vet INTEGER, \n"
-                    + "dat_con TEXT); \n");
+                    + "id_animal INTEGER, \n"
+                    + "sintomas VARCHAR, \n"
+                    + "dat_con VARCHAR); \n");
             executeUpdate(stmt);
 
             stmt = DAO.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS Exame( \n"

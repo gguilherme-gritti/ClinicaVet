@@ -30,14 +30,13 @@ public class TratamentoDAO extends DAO {
         return (instance == null ? (instance = new TratamentoDAO()) : instance);
     }
 
-    public Tratamento create(int id_animal, LocalDate dat_ini, LocalDate dat_fim, int finalizado) {
+    public Tratamento create(int id_animal, String data_ini, int finalizado) {
         try {
             PreparedStatement stmt;
-            stmt = DAO.getConnection().prepareStatement("INSERT INTO Tratamento (id_animal,dat_ini,dat_fim,finalizado) VALUES( ?,  ?,  ?,  ?)");
+            stmt = DAO.getConnection().prepareStatement("INSERT INTO Tratamento (id_animal,data_ini,finalizado) VALUES( ?,  ?,  ?)");
             stmt.setInt(1, id_animal);
-            stmt.setObject(2,dat_ini);
-            stmt.setObject(3,dat_fim);
-            stmt.setInt(4, finalizado);
+            stmt.setString(2, data_ini);
+            stmt.setInt(3, finalizado);
             executeUpdate(stmt);
 
         } catch (SQLException ex) {
@@ -49,7 +48,7 @@ public class TratamentoDAO extends DAO {
     private Tratamento buildObject(ResultSet rs) {
         Tratamento tratamento = null;
         try {
-            tratamento = new Tratamento(rs.getInt("id_trat"), rs.getInt("id_animal"),(LocalDate) rs.getObject("dat_ini"),(LocalDate) rs.getObject("dat_fim"), rs.getInt("finalizado"));
+            tratamento = new Tratamento(rs.getInt("id_trat"), rs.getInt("id_animal"), rs.getString("data_ini"), rs.getString("data_fim"), rs.getInt("finalizado"));
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
         }
@@ -69,8 +68,13 @@ public class TratamentoDAO extends DAO {
         return tratamentos;
     }
 
-    public Tratamento retrieveById(int id) {
-        List<Tratamento> tratamentos = this.retrieve("SELECT * FROM Tratamento WHERE id_trat = " + id);
+    public Tratamento retrieveByAnimalId(int id_ani) {
+        List<Tratamento> tratamentos = this.retrieve("SELECT * FROM Tratamento WHERE id_animal = " + id_ani);
+        return (tratamentos.isEmpty() ? null : tratamentos.get(0));
+    }
+
+    public Tratamento retrieveById(int id_trat) {
+        List<Tratamento> tratamentos = this.retrieve("SELECT * FROM Tratamento WHERE id_trat = " + id_trat);
         return (tratamentos.isEmpty() ? null : tratamentos.get(0));
     }
 

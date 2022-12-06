@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  */
 public abstract class DAO {
 
-    public static final String DBURL = "jdbc:sqlite:veterinaria.db";
+    public static final String DBURL = "jdbc:sqlite:vet-tt001.db";
     private static Connection con;
     protected static SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -80,17 +80,13 @@ public abstract class DAO {
             PreparedStatement stmt;
             stmt = DAO.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS Cliente( \n"
                     + "id_cli INTEGER PRIMARY KEY, \n"
-                    + "id_end VARCHAR, \n"
                     + "nom_cli VARCHAR, \n"
+                    + "cidade_cli VARCHAR, \n"
+                    + "estado_cli VARCHAR, \n"
+                    + "rua_cli VARCHAR, \n"
+                    + "bairro_cli VARCHAR, \n"
+                    + "cep_cli VARCHAR, \n"
                     + "email_cli VARCHAR); \n");
-            executeUpdate(stmt);
-
-            stmt = DAO.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS Endereco( \n"
-                    + "id_end INTEGER PRIMARY KEY, \n"
-                    + "rua_end VARCHAR, \n"
-                    + "cidade_end VARCHAR, \n"
-                    + "bairro_end VARCHAR, \n"
-                    + "cep_end VARCHAR); \n");
             executeUpdate(stmt);
 
             stmt = DAO.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS Animal( \n"

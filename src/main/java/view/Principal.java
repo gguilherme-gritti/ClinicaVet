@@ -12,6 +12,8 @@ import controller.Controller;
  */
 public class Principal extends javax.swing.JFrame {
 
+    private Warning modalWarning = null;
+
     /**
      * Creates new form Principal
      */
@@ -19,17 +21,19 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         initMyComponents();
     }
-    
-    private void initMyComponents(){
+
+    private void initMyComponents() {
         jTable1.setModel(new ClientTableModel(Controller.getAllClients()));
         jTable8.setModel(new VeterinarioTableModel(Controller.getAllVeterinarios()));
-        
+
+        modalWarning = new Warning(this, true);
+
         clearClientes();
         clearAnimais();
         clearVeterinarios();
     }
-    
-    private void clearClientes(){
+
+    private void clearClientes() {
         jTextField1.setText("");
         jTextField2.setText("");
         jTextField3.setText("");
@@ -38,15 +42,24 @@ public class Principal extends javax.swing.JFrame {
         jTextField6.setText("");
         jTextField7.setText("");
     }
-    
-    private void clearAnimais(){
+
+    private void clearAnimais() {
         jTextField8.setText("");
         jTextField9.setText("");
     }
-    
-    private void clearVeterinarios(){
-       jTextField12.setText("");
-       jTextField13.setText(""); 
+
+    private void clearVeterinarios() {
+        jTextField12.setText("");
+        jTextField13.setText("");
+    }
+
+    private boolean validCliente() {
+        if (jTextField1.getText().isEmpty() || jTextField2.getText().isEmpty() || jTextField3.getText().isEmpty() || jTextField4.getText().isEmpty()
+                || jTextField5.getText().isEmpty() || jTextField6.getText().isEmpty() || jTextField7.getText().isEmpty()) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -834,7 +847,13 @@ public class Principal extends javax.swing.JFrame {
 
     //Adicionar Cliente
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Controller.addCliente(jTextField1.getText(), jTextField2.getText());
+        if (!validCliente()) {
+            modalWarning.setMessage("Campos Obrigatórios não preenchidos!");
+            modalWarning.show();
+        }
+
+        Controller.addCliente(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), jTextField4.getText(),
+                jTextField5.getText(), jTextField6.getText(), jTextField7.getText());
         clearClientes();
         jTable1.setModel(new ClientTableModel(Controller.getAllClients()));
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
 import java.util.ArrayList;
@@ -29,13 +25,17 @@ public class ClienteDAO extends DAO {
         return (instance == null ? (instance = new ClienteDAO()) : instance);
     }
 
-    public Cliente create(int id_end, String nom_cli, String email_cli) {
+    public Cliente create(String nom_cli, String email_cli, String cidade_cli, String estado_cli, String rua_cli, String bairro_cli, String cep_cli) {
         try {
             PreparedStatement stmt;
-            stmt = DAO.getConnection().prepareStatement("INSERT INTO Cliente (id_end, nom_cli, email_cli) VALUES (?,?,?)");
-            stmt.setInt(1, id_end);
-            stmt.setString(2, nom_cli);
-            stmt.setString(3, email_cli);
+            stmt = DAO.getConnection().prepareStatement("INSERT INTO Cliente (nom_cli, email_cli, cidade_cli, estado_cli, rua_cli, bairro_cli, cep_cli) VALUES (?,?,?,?,?,?,?)");
+            stmt.setString(1, nom_cli);
+            stmt.setString(2, email_cli);
+            stmt.setString(3, cidade_cli);
+            stmt.setString(4, estado_cli);
+            stmt.setString(5, rua_cli);
+            stmt.setString(6, bairro_cli);
+            stmt.setString(7, cep_cli);
             executeUpdate(stmt);
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -54,7 +54,8 @@ public class ClienteDAO extends DAO {
     private Cliente buildObject(ResultSet rs) {
         Cliente cliente = null;
         try {
-            cliente = new Cliente(rs.getInt("id_cli"), rs.getInt("id_end"), rs.getString("nom_cli"), rs.getString("email_cli"));
+            cliente = new Cliente(rs.getInt("id_cli"), rs.getString("nom_cli"), rs.getString("email_cli"), rs.getString("cidade_cli"), rs.getString("estado_cli"),
+            rs.getString("rua_cli"), rs.getString("bairro_cli"), rs.getString("cep_cli"));
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
         }
@@ -73,7 +74,7 @@ public class ClienteDAO extends DAO {
         }
         return clientes;
     }
-    
+
     public List retrieveAll() {
         return this.retrieve("SELECT * FROM Cliente");
     }

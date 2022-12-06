@@ -59,9 +59,7 @@ public class ClientTableModel extends GenericTableModel{
                 break;
         }
         
-        //Gambs por enquanto
-        cliente.setId_end(1);
-   
+        //Gambs por enquanto   
         ClienteDAO.getInstance().update(cliente);
 
     }

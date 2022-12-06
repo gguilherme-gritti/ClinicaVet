@@ -82,4 +82,18 @@ public class TratamentoDAO extends DAO {
         return (tratamentos.isEmpty() ? null : tratamentos.get(0));
     }
 
+    public void update(Tratamento tratamento) {
+        try {
+            PreparedStatement stmt;
+            stmt = DAO.getConnection().prepareStatement("UPDATE Tratamento SET finalizado=?, data_fim=? WHERE id_trat=?");
+            stmt.setObject(1, tratamento.getFinalizado());
+            stmt.setString(2, tratamento.getDat_fim());
+            stmt.setInt(3, tratamento.getId_trat());
+
+            executeUpdate(stmt);
+        } catch (SQLException e) {
+            System.err.println("Exception: " + e.getMessage());
+        }
+    }
+
 }

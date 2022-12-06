@@ -1075,9 +1075,14 @@ public class Principal extends javax.swing.JFrame {
             return;
         }
         
-        Controller.addConsulta(jTextArea1.getText());
+        int finalizado = 0;
+        if(jCheckBox1.isSelected()){
+            finalizado = 1;
+        }
+        Controller.addConsulta(jTextArea1.getText(), finalizado);
         clearConsulta();
         jTable3.setModel(new ConsultaTableModel(Controller.getConsultsByAnimalId(Controller.getSelectedAnimal().getId_ani())));
+        jTable5.setModel(new TratamentoTableModel(Controller.getAllTratamentos()));
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
@@ -1129,6 +1134,7 @@ public class Principal extends javax.swing.JFrame {
         Controller.addAnimal(jTextField8.getText(), Integer.parseInt(jTextField9.getText()), sexo);
         jTable2.setModel(new AnimalTableModel(Controller.getAnimalsByClienteId(Controller.getSelectedClient().getId_cli())));
         
+        jTable5.setModel(new TratamentoTableModel(Controller.getAllTratamentos()));
         clearAnimais();
 
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -1177,6 +1183,7 @@ public class Principal extends javax.swing.JFrame {
         
         Controller.addExame(jTextArea2.getText(), jTextArea3.getText());
         jTable7.setModel(new ExameTableModel(Controller.getExamesByConsultId(Controller.getSelectedConsulta().getId_cons())));
+        clearExame();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**

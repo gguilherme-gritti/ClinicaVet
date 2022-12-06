@@ -15,10 +15,11 @@ public class Exame {
     private String des_exame;
     private String res_exame;
 
-    public Exame(int id_exam, int id_cons, String des_exame) {
+    public Exame(int id_exam, int id_cons, String des_exame, String res_exame) {
         this.id_exam = id_exam;
         this.id_cons = id_cons;
         this.des_exame = des_exame;
+        this.res_exame = res_exame;
     }
 
     public int getId_exam() {

@@ -110,11 +110,11 @@ public class Controller {
         AnimalDAO.getInstance().create(selectedClient.getId_cli(), 1, nome, idade, sexo);
     }
 
-    public static void addConsulta(String sintomas) {
+    public static void addConsulta(String sintomas, int finalizado) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
         String date = sdf.format(new Date());
 
-        setSelectedTratamentoByAnimalId();
+        setSelectedTratamentoByAnimalId(finalizado);
         ConsultaDAO.getInstance().create(selectedTratamento.getId_trat(), selectedVeterinario.getId_vet(), sintomas, date, selectedAnimal.getId_ani());
     }
     
@@ -132,21 +132,28 @@ public class Controller {
         selectedAnimalTP.setText(animal.getNome_animal());
         selectedIdadeAnimalTP.setText(String.valueOf(animal.getIdade_animal()));
 
-        setSelectedTratamentoByAnimalId();
+        setSelectedTratamentoByAnimalId(0);
     }
 
     public static void setSelectedTratamento(Tratamento tratamento) {
         selectedTratamento = tratamento;
     }
 
-    public static void setSelectedTratamentoByAnimalId() {
+    public static void setSelectedTratamentoByAnimalId(int finalizado) {
         Tratamento tratamentos = TratamentoDAO.getInstance().retrieveByAnimalId(selectedAnimal.getId_ani());
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
         String date = sdf.format(new Date());
 
         if (tratamentos == null) {
-            tratamentos = TratamentoDAO.getInstance().create(selectedAnimal.getId_ani(), date, 0);
+            tratamentos = TratamentoDAO.getInstance().create(selectedAnimal.getId_ani(), date, finalizado);
+        }else{
+            tratamentos.setFinalizado(finalizado);
+            System.out.println(finalizado);
+            if(finalizado == 1){
+                tratamentos.setDat_fim(date);
+            }
+            TratamentoDAO.getInstance().update(tratamentos);
         }
 
         selectedTratamento = tratamentos;

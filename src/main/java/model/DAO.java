@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  */
 public abstract class DAO {
 
-    public static final String DBURL = "jdbc:sqlite:veterinaria-v1.db";
+    public static final String DBURL = "jdbc:sqlite:veterinaria-v3.db";
     private static Connection con;
     protected static SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 

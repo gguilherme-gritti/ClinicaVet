@@ -90,8 +90,6 @@ public class ExameDAO extends DAO {
 
     public void update(Exame exame) {
         try {
-            System.out.println(exame.getRes_exame());
-            System.out.println(exame.getId_exam());
             PreparedStatement stmt;
             stmt = DAO.getConnection().prepareStatement("UPDATE Exame SET des_exame=?, res_exame=? WHERE id=?");
             stmt.setObject(1, exame.getDes_exame());

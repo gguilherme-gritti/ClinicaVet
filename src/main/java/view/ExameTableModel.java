@@ -38,7 +38,6 @@ public class ExameTableModel extends GenericTableModel {
             case 0:
                 return exame.getDes_exame();
             case 1:
-                System.out.println("caiu certo");
                 return exame.getRes_exame();
 
             default:
@@ -56,7 +55,6 @@ public class ExameTableModel extends GenericTableModel {
                 exame.setDes_exame((String) aValue);
                 break;
             case 1:
-                System.out.println("caiu certo");
                 exame.setRes_exame((String) aValue);
                 break;
             default:

@@ -720,16 +720,19 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel14.setText("Data da Consulta");
 
+        jTextPane4.setDisabledTextColor(new java.awt.Color(0, 0, 200));
         jTextPane4.setEnabled(false);
         jScrollPane6.setViewportView(jTextPane4);
 
         jLabel15.setText("Sintomas da Consulta");
 
+        jTextPane5.setDisabledTextColor(new java.awt.Color(0, 0, 200));
         jTextPane5.setEnabled(false);
         jScrollPane7.setViewportView(jTextPane5);
 
         jLabel37.setText("Animal da Consulta");
 
+        jTextPane10.setDisabledTextColor(new java.awt.Color(0, 0, 200));
         jTextPane10.setEnabled(false);
         jScrollPane22.setViewportView(jTextPane10);
 
@@ -900,8 +903,7 @@ public class Principal extends javax.swing.JFrame {
                                         .addGap(24, 24, 24)
                                         .addComponent(jLabel26)))
                                 .addGap(136, 136, 136)
-                                .addComponent(jLabel27)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jLabel27))
                             .addComponent(jScrollPane20, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -967,21 +969,25 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel8.setText("Cliente: ");
 
+        jTextPane1.setDisabledTextColor(new java.awt.Color(0, 0, 255));
         jTextPane1.setEnabled(false);
         jScrollPane1.setViewportView(jTextPane1);
 
         jLabel9.setText("Animal:");
 
+        jTextPane2.setDisabledTextColor(new java.awt.Color(0, 0, 255));
         jTextPane2.setEnabled(false);
         jScrollPane2.setViewportView(jTextPane2);
 
         jLabel10.setText("Idade: ");
 
+        jTextPane3.setDisabledTextColor(new java.awt.Color(0, 0, 255));
         jTextPane3.setEnabled(false);
         jScrollPane3.setViewportView(jTextPane3);
 
         jLabel33.setText("Veterinário:");
 
+        jTextPane9.setDisabledTextColor(new java.awt.Color(0, 0, 255));
         jTextPane9.setEnabled(false);
         jScrollPane21.setViewportView(jTextPane9);
 

@@ -55,7 +55,7 @@ public class ClienteDAO extends DAO {
         Cliente cliente = null;
         try {
             cliente = new Cliente(rs.getInt("id_cli"), rs.getString("nom_cli"), rs.getString("email_cli"), rs.getString("cidade_cli"), rs.getString("estado_cli"),
-            rs.getString("rua_cli"), rs.getString("bairro_cli"), rs.getString("cep_cli"));
+                    rs.getString("rua_cli"), rs.getString("bairro_cli"), rs.getString("cep_cli"));
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
         }
@@ -95,10 +95,17 @@ public class ClienteDAO extends DAO {
     public void update(Cliente cliente) {
         try {
             PreparedStatement stmt;
-            stmt = DAO.getConnection().prepareStatement("UPDATE Cliente SET nom_cli=?, email_cli=? WHERE id_cli=?");
+            stmt = DAO.getConnection().prepareStatement("UPDATE Cliente SET nom_cli=?, email_cli=?, cidade_cli=?, estado_cli=?,"
+                    + "rua_cli=?, bairro_cli=?, cep_cli=? WHERE id_cli=?");
             stmt.setString(1, cliente.getNom_cli());
             stmt.setString(2, cliente.getEmail_cli());
-            stmt.setInt(3, cliente.getId_cli());
+            stmt.setString(3, cliente.getCidade_cli());
+            stmt.setString(4, cliente.getEstado_cli());
+            stmt.setString(5, cliente.getRua_cli());
+            stmt.setString(6, cliente.getBairro_cli());
+            stmt.setString(7, cliente.getCep_cli());
+            stmt.setInt(8, cliente.getId_cli());
+            
             executeUpdate(stmt);
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());

@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  */
 public abstract class DAO {
 
-    public static final String DBURL = "jdbc:sqlite:vet-tt001.db";
+    public static final String DBURL = "jdbc:sqlite:vet.db";
     private static Connection con;
     protected static SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -105,9 +105,11 @@ public abstract class DAO {
 
             stmt = DAO.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS Veterinario( \n"
                     + "id_vet INTEGER PRIMARY KEY, \n"
-                    + "id_cons INTEGER, \n"
-                    + "id_end INTEGER, \n"
-                    + "nom_vet VARCHAR, \n"
+                    + "nom_vet VARCHAR, \n "
+                    + "cidade_vet VARCHAR, \n "
+                    + "estado_vet VARCHAR, \n "
+                    + "rua_vet VARCHAR, \n "
+                    + "bairro_vet VARCHAR, \n "
                     + "tel_vet VARCHAR); \n");
             executeUpdate(stmt);
 
@@ -123,6 +125,7 @@ public abstract class DAO {
             stmt = DAO.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS Consulta( \n"
                     + "id_cons INTEGER PRIMARY KEY, \n"
                     + "id_trat INTEGER, \n"
+                    + "id_vet INTEGER, \n"
                     + "dat_con TEXT); \n");
             executeUpdate(stmt);
 

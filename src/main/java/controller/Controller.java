@@ -40,8 +40,8 @@ public class Controller {
         ClienteDAO.getInstance().create(nome, email, cidade, estado, rua, bairro, cep);
     }
 
-    public static void addVeterinario(String nome, String telefone) {
-        VeterinarioDAO.getInstance().create(1, 1, nome, telefone);
+    public static void addVeterinario(String nome, String telefone, String cidade, String estado, String rua, String bairro) {
+        VeterinarioDAO.getInstance().create(nome, telefone, cidade, estado, rua, bairro);
     }
 
 }

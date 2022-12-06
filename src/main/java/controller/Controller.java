@@ -7,6 +7,7 @@ package controller;
 import java.util.List;
 import javax.swing.JTextPane;
 import model.Animal;
+import model.AnimalDAO;
 import model.Cliente;
 import model.ClienteDAO;
 import model.Veterinario;
@@ -41,6 +42,14 @@ public class Controller {
     public static List getAllVeterinarios() {
         return VeterinarioDAO.getInstance().retrieveAll();
     }
+    
+    public static List getAllAnimals(){
+        return AnimalDAO.getInstance().retrieveAll();
+    }
+    
+    public static List getAnimalsByClienteId(int id_cli){
+        return AnimalDAO.getInstance().retrieveByClienteId(id_cli);
+    }
 
     public static void addCliente(String nome, String email, String cidade, String estado, String rua, String bairro, String cep) {;
         ClienteDAO.getInstance().create(nome, email, cidade, estado, rua, bairro, cep);
@@ -48,6 +57,10 @@ public class Controller {
 
     public static void addVeterinario(String nome, String telefone, String cidade, String estado, String rua, String bairro) {
         VeterinarioDAO.getInstance().create(nome, telefone, cidade, estado, rua, bairro);
+    }
+    
+    public static void addAnimal(String nome, int idade, int sexo){
+        AnimalDAO.getInstance().create(selectedClient.getId_cli(), 1, nome, idade, sexo);
     }
 
     public static void setSelectedCliente(Cliente cliente) {

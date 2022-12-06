@@ -12,15 +12,15 @@ public class Animal {
     
     private int id_ani;
     private int id_cli;
-    private int esp_id;
+    private int id_esp;
     private String nome_animal;
     private int idade_animal;
     private int sexo_animal;
 
-    public Animal(int id_ani, int id_cli, int esp_id, String nome_animal, int idade_animal, int sexo_animal) {
+    public Animal(int id_ani, int id_cli, int id_esp, String nome_animal, int idade_animal, int sexo_animal) {
         this.id_ani = id_ani;
         this.id_cli = id_cli;
-        this.esp_id = esp_id;
+        this.id_esp = id_esp;
         this.nome_animal = nome_animal;
         this.idade_animal = idade_animal;
         this.sexo_animal = sexo_animal;
@@ -34,8 +34,12 @@ public class Animal {
         return id_cli;
     }
 
+    public void setEsp_id(int id_esp) {
+        this.id_esp = id_esp;
+    }
+
     public int getEsp_id() {
-        return esp_id;
+        return id_esp;
     }
 
     public String getNome_animal() {

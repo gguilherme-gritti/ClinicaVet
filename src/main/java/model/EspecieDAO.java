@@ -16,9 +16,9 @@ import java.util.logging.Logger;
  *
  * @author Gritti
  */
-public class EspecieDAO extends DAO{
-    
-private static EspecieDAO instance;
+public class EspecieDAO extends DAO {
+
+    private static EspecieDAO instance;
 
     private EspecieDAO() {
         getConnection();
@@ -78,4 +78,9 @@ private static EspecieDAO instance;
         return (animais.isEmpty() ? null : animais.get(0));
     }
 
+    public Especie retrieveByName(String name) {
+        List<Especie> animais = this.retrieve("SELECT * FROM Especie WHERE nome_esp LIKE '%" + name + "%'");
+        return (animais.isEmpty() ? null : animais.get(0));
+    }
+    
 }

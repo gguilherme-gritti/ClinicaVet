@@ -12,7 +12,7 @@ import model.Cliente;
  * @author Gritti
  */
 public class Principal extends javax.swing.JFrame {
-    
+
     private Warning modalWarning = null;
 
     /**
@@ -22,20 +22,25 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         initMyComponents();
     }
-    
+
     private void initMyComponents() {
         jTable1.setModel(new ClientTableModel(Controller.getAllClients()));
         jTable8.setModel(new VeterinarioTableModel(Controller.getAllVeterinarios()));
-        
+        jTable2.setModel(new AnimalTableModel(Controller.getAllAnimals()));
+
         modalWarning = new Warning(this, true);
-        
+
         Controller.setSelectedTextFields(jTextPane1, jTextPane2, jTextPane3, jTextPane9);
-        
+
+        buttonGroup2.add(jRadioButton1);
+        buttonGroup2.add(jRadioButton2);
+        jLabel35.setText("Atenção: Você não possui nenhum cliente selecionado para efetuar o cadastro.");
+
         clearClientes();
         clearAnimais();
         clearVeterinarios();
     }
-    
+
     private void clearClientes() {
         jTextField1.setText("");
         jTextField2.setText("");
@@ -45,12 +50,12 @@ public class Principal extends javax.swing.JFrame {
         jTextField6.setText("");
         jTextField7.setText("");
     }
-    
+
     private void clearAnimais() {
         jTextField8.setText("");
         jTextField9.setText("");
     }
-    
+
     private void clearVeterinarios() {
         jTextField12.setText("");
         jTextField13.setText("");
@@ -59,21 +64,34 @@ public class Principal extends javax.swing.JFrame {
         jTextField14.setText("");
         jTextField15.setText("");
     }
-    
+
     private boolean validCliente() {
         if (jTextField1.getText().isEmpty() || jTextField2.getText().isEmpty() || jTextField3.getText().isEmpty() || jTextField4.getText().isEmpty()
                 || jTextField5.getText().isEmpty() || jTextField6.getText().isEmpty() || jTextField7.getText().isEmpty()) {
             return false;
         }
-        
+
         return true;
     }
-    
+
     private boolean validVeterinario() {
         if (jTextField12.getText().isEmpty() || jTextField13.getText().isEmpty() || jTextField10.getText().isEmpty()
                 || jTextField11.getText().isEmpty() || jTextField14.getText().isEmpty() || jTextField15.getText().isEmpty()) {
             return false;
         }
+        return true;
+    }
+
+    private boolean validAnimal() {
+
+        if (jTextField8.getText().isEmpty() || jTextField9.getText().isEmpty()) {
+            return false;
+        }
+
+        if (!jRadioButton1.isSelected() && !jRadioButton2.isSelected()) {
+            return false;
+        }
+
         return true;
     }
 
@@ -86,6 +104,7 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -116,6 +135,7 @@ public class Principal extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        jLabel35 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
@@ -369,6 +389,11 @@ public class Principal extends javax.swing.JFrame {
         jRadioButton2.setText("Feminino");
 
         jButton2.setText("ADICIONAR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -382,6 +407,9 @@ public class Principal extends javax.swing.JFrame {
             }
         ));
         jScrollPane5.setViewportView(jTable2);
+
+        jLabel35.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel35.setText("jLabel35");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -408,7 +436,8 @@ public class Principal extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jRadioButton2)
                                 .addGap(32, 32, 32)
-                                .addComponent(jButton2)))
+                                .addComponent(jButton2))
+                            .addComponent(jLabel35))
                         .addGap(0, 169, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -427,8 +456,10 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jRadioButton1)
                     .addComponent(jRadioButton2)
                     .addComponent(jButton2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(jLabel35)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -952,20 +983,12 @@ public class Principal extends javax.swing.JFrame {
             modalWarning.show();
             return;
         }
-        
+
         Controller.addCliente(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), jTextField4.getText(),
                 jTextField5.getText(), jTextField6.getText(), jTextField7.getText());
         clearClientes();
         jTable1.setModel(new ClientTableModel(Controller.getAllClients()));
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
-
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -989,8 +1012,44 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
-        Controller.setSelectedCliente((Cliente)((GenericTableModel) jTable1.getModel()).getItem(jTable1.getSelectedRow()));
+        Controller.setSelectedCliente((Cliente) ((GenericTableModel) jTable1.getModel()).getItem(jTable1.getSelectedRow()));
+        jTable2.setModel(new AnimalTableModel(Controller.getAnimalsByClienteId(Controller.getSelectedClient().getId_cli())));
+
+        jLabel35.setText("");
     }//GEN-LAST:event_jTable1MousePressed
+
+    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField8ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int sexo = 0;
+        if (Controller.getSelectedClient() == null) {
+            modalWarning.setMessage("Não há nenhum cliente selecionado para efetuar o cadastro!");
+            modalWarning.show();
+            return;
+        }
+
+        if (!validAnimal()) {
+            modalWarning.setMessage("Campos obrigatórios não preenchidos!");
+            modalWarning.show();
+            return;
+        }
+
+        if (jRadioButton1.isSelected()) {
+            sexo = 1;
+        }
+
+        Controller.addAnimal(jTextField8.getText(), Integer.parseInt(jTextField9.getText()), sexo);
+        jTable2.setModel(new AnimalTableModel(Controller.getAnimalsByClienteId(Controller.getSelectedClient().getId_cli())));
+
+        clearAnimais();
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1028,6 +1087,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -1062,6 +1122,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

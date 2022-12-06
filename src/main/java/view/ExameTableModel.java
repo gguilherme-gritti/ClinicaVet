@@ -5,18 +5,17 @@
 package view;
 
 import java.util.List;
-import model.Consulta;
-import java.time.LocalDate;
-import model.ConsultaDAO;
+import model.Exame;
+import model.ExameDAO;
 
 /**
  *
  * @author Gritti
  */
-public class ConsultaTableModel extends GenericTableModel {
+public class ExameTableModel extends GenericTableModel {
 
-    public ConsultaTableModel(List vDados) {
-        super(vDados, new String[]{"Data", "Sintomas"});
+    public ExameTableModel(List vDados) {
+        super(vDados, new String[]{"Descrição", "Resultado"});
     }
 
     @Override
@@ -33,13 +32,13 @@ public class ConsultaTableModel extends GenericTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Consulta consulta = (Consulta) vDados.get(rowIndex);
+        Exame exame = (Exame) vDados.get(rowIndex);
 
         switch (columnIndex) {
             case 0:
-                return consulta.getDat_con();
+                return exame.getDes_exame();
             case 1:
-                return consulta.getSintomas();
+                return exame.getRes_exame();
 
             default:
                 return "";
@@ -49,20 +48,20 @@ public class ConsultaTableModel extends GenericTableModel {
 
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        Consulta consulta = (Consulta) vDados.get(rowIndex);
+        Exame exame = (Exame) vDados.get(rowIndex);
 
         switch (columnIndex) {
             case 0:
-                consulta.setDat_con((String) aValue);
+                exame.setDes_exame((String) aValue);
                 break;
             case 1:
-                consulta.setSintomas((String) aValue);
+                exame.setRes_exame((String) aValue);
                 break;
             default:
                 break;
         }
 
-        ConsultaDAO.getInstance().update(consulta);
+        ExameDAO.getInstance().update(exame);
     }
 
     @Override

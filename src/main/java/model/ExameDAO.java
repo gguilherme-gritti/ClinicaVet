@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  *
  * @author Gritti
  */
-public class ExameDAO extends DAO{
+public class ExameDAO extends DAO {
 
     private static ExameDAO instance;
 
@@ -29,18 +29,19 @@ public class ExameDAO extends DAO{
         return (instance == null ? (instance = new ExameDAO()) : instance);
     }
 
-    public Exame create(int id_cons, String des_exame) {
+    public Exame create(int id_cons, String des_exame, String res_exame) {
         try {
             PreparedStatement stmt;
-            stmt = DAO.getConnection().prepareStatement("INSERT INTO Exame (id_cons, des_exame) VALUES (?, ?)");
+            stmt = DAO.getConnection().prepareStatement("INSERT INTO Exame (id_cons, des_exame, res_exame) VALUES (?, ?, ?)");
             stmt.setInt(1, id_cons);
             stmt.setString(2, des_exame);
+            stmt.setString(3, res_exame);
             executeUpdate(stmt);
 
         } catch (SQLException ex) {
             Logger.getLogger(ExameDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return this.retrieveById(lastId("Exame", "id_exam"));
+        return this.retrieveById(lastId("Exame", "id"));
     }
 
     public boolean isLastEmpty() {
@@ -54,7 +55,7 @@ public class ExameDAO extends DAO{
     private Exame buildObject(ResultSet rs) {
         Exame exame = null;
         try {
-            exame = new Exame(rs.getInt("id_exam"), rs.getInt("id_cons"), rs.getString("des_exame"));
+            exame = new Exame(rs.getInt("id"), rs.getInt("id_cons"), rs.getString("des_exame"));
         } catch (SQLException e) {
             System.err.println("Exception: " + e.getMessage());
         }
@@ -74,9 +75,31 @@ public class ExameDAO extends DAO{
         return exames;
     }
 
+    public List retrieveAll() {
+        return this.retrieve("SELECT * FROM Exame");
+    }
+
+    public List retrieveByConsultId(int id_cons) {
+        return this.retrieve("SELECT * FROM Exame WHERE id_cons = " + id_cons);
+    }
+
     public Exame retrieveById(int id) {
-        List<Exame> exames = this.retrieve("SELECT * FROM Exame WHERE id_exam = " + id);
+        List<Exame> exames = this.retrieve("SELECT * FROM Exame WHERE id = " + id);
         return (exames.isEmpty() ? null : exames.get(0));
     }
-    
+
+    public void update(Exame exame) {
+        try {
+            PreparedStatement stmt;
+            stmt = DAO.getConnection().prepareStatement("UPDATE Exame SET des_exame=?, res_exame=? WHERE id=?");
+            stmt.setObject(1, exame.getDes_exame());
+            stmt.setString(2, exame.getRes_exame());
+            stmt.setInt(3, exame.getId_exam());
+
+            executeUpdate(stmt);
+        } catch (SQLException e) {
+            System.err.println("Exception: " + e.getMessage());
+        }
+    }
+
 }

@@ -17,6 +17,8 @@ import model.Tratamento;
 import model.TratamentoDAO;
 import model.Veterinario;
 import model.VeterinarioDAO;
+import model.Consulta;
+import model.ExameDAO;
 
 /**
  *
@@ -28,17 +30,28 @@ public class Controller {
     private static Animal selectedAnimal = null;
     private static Veterinario selectedVeterinario = null;
     private static Tratamento selectedTratamento = null;
+    private static Consulta selectedConsulta = null;
 
     private static JTextPane selectedClientTP = null;
     private static JTextPane selectedAnimalTP = null;
     private static JTextPane selectedIdadeAnimalTP = null;
     private static JTextPane selectedVeterinarioTP = null;
+    
+    private static JTextPane selectedDataConsTP = null;
+    private static JTextPane selectedAnimalConsTP = null;
+    private static JTextPane selectedSintomasConsTP = null;
 
     public static void setSelectedTextFields(JTextPane cliente, JTextPane animal, JTextPane idadeAnimal, JTextPane veterinario) {
         selectedClientTP = cliente;
         selectedAnimalTP = animal;
         selectedIdadeAnimalTP = idadeAnimal;
         selectedVeterinarioTP = veterinario;
+    }
+    
+    public static void setSelectedTextFieldsConsulta(JTextPane data, JTextPane animal, JTextPane sintomas){
+        selectedDataConsTP = data;
+        selectedAnimalConsTP = animal;
+        selectedSintomasConsTP = sintomas;
     }
 
     public static List getAllClients() {
@@ -59,6 +72,14 @@ public class Controller {
 
     public static List getAllTratamentos() {
         return TratamentoDAO.getInstance().retrieveAll();
+    }
+    
+    public static List getAllExames() {
+        return ExameDAO.getInstance().retrieveAll();
+    }
+    
+    public static List getExamesByConsultId(int id_cons){
+        return ExameDAO.getInstance().retrieveByConsultId(id_cons);
     }
 
     public static List getAnimalsByClienteId(int id_cli) {
@@ -96,6 +117,10 @@ public class Controller {
         setSelectedTratamentoByAnimalId();
         ConsultaDAO.getInstance().create(selectedTratamento.getId_trat(), selectedVeterinario.getId_vet(), sintomas, date, selectedAnimal.getId_ani());
     }
+    
+    public static void addExame(String descricao, String resultado){
+        ExameDAO.getInstance().create(selectedConsulta.getId_cons(), descricao, resultado);
+    }
 
     public static void setSelectedCliente(Cliente cliente) {
         selectedClient = cliente;
@@ -131,6 +156,19 @@ public class Controller {
         selectedVeterinario = veterinario;
         selectedVeterinarioTP.setText(veterinario.getNom_vet());
     }
+    
+    public static void setSelectedConsulta(Consulta consulta){
+        selectedConsulta = consulta;
+        
+        Animal animal = AnimalDAO.getInstance().retrieveById(consulta.getId_animal());
+        
+        selectedDataConsTP.setText(consulta.getDat_con()) ;
+        selectedSintomasConsTP.setText(consulta.getSintomas()) ;
+        
+        if(animal != null){
+            selectedAnimalConsTP.setText(animal.getNome_animal());
+        }
+    }
 
     public static Cliente getSelectedClient() {
         return selectedClient;
@@ -146,6 +184,10 @@ public class Controller {
 
     public static Tratamento getSelectedTratamento() {
         return selectedTratamento;
+    }
+    
+    public static Consulta getSelectedConsulta() {
+        return selectedConsulta;
     }
 
 }

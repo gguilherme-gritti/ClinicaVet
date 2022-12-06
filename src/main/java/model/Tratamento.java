@@ -4,8 +4,6 @@
  */
 package model;
 
-import java.time.LocalDate;
-
 /**
  *
  * @author g247468
